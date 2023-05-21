@@ -61,7 +61,19 @@ def exponential_search(arr, target):
     while i < size and arr[i] <= target:
         i *= 2
 
-    return binary_search(arr, target, i // 2, min(i, size - 1))
+    return binary_exponential_search(arr, target, i // 2, min(i, size - 1))
+
+def binary_exponential_search(arr, target, low, high):
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
 
 
 # Пример использования:
@@ -69,6 +81,8 @@ def exponential_search(arr, target):
 # Ввод массива чисел
 numbers = input("Введите числа через пробел: ").split()
 arr = [int(num) for num in numbers]
+arr = arr.sort()
+print("Отсортированный массив: ",  arr)
 
 # Ввод целевого элемента
 target = int(input("Введите целевой элемент: "))
